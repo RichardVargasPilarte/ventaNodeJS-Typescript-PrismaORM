@@ -1,0 +1,137 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMINISTRADOR
+  BODEGUERO
+  VENDEDOR
+}
+
+model Usuario {
+  id             String    @id @default(uuid())
+  nombre         String    @db.VarChar(30)
+  apellido       String    @db.VarChar(30)
+  email          String    @unique @db.VarChar(50)
+  role           Role      @default(ADMINISTRADOR)
+  username       String    @unique @db.VarChar(30)
+  tipo_documento String    @db.VarChar(20)
+  num_documento  String    @db.VarChar(30)
+  direccion      String    @db.VarChar(75)
+  telefono       String    @db.VarChar(10)
+  password       String    @db.VarChar(50)
+  estado         Int       @default(1)
+  createdAt      DateTime  @default(now())
+  eliminado      String    @default("NO")
+  updatedAt      DateTime  @updatedAt
+  ingreso        Ingreso[]
+  venta          Venta[]
+}
+
+model Persona {
+  id             String    @id @default(uuid())
+  nombre         String    @db.VarChar(30)
+  apellido       String    @db.VarChar(30)
+  tipo_persona   String    @db.VarChar(20)
+  tipo_documento String    @db.VarChar(20)
+  num_documento  String    @db.VarChar(30)
+  direccion      String    @db.VarChar(75)
+  telefono       String    @db.VarChar(10)
+  email          String    @unique
+  estado         Int       @default(1)
+  eliminado      String    @default("NO")
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  ingreso        Ingreso[]
+  venta          Venta[]
+}
+
+model Categoria {
+  id          String     @id @default(uuid())
+  nombre      String     @unique @db.VarChar(50)
+  descripcion String     @db.VarChar(255)
+  estado      Int        @default(1)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  eliminado   String     @default("NO")
+  articulo    Articulo[]
+}
+
+model Ingreso {
+  id                String            @id @default(uuid())
+  usuario           Usuario           @relation(fields: [usuarioId], references: [id])
+  usuarioId         String
+  persona           Persona           @relation(fields: [personaId], references: [id])
+  personaId         String
+  tipo_comprobante  String            @db.VarChar(20)
+  serie_comprobante String            @db.VarChar(7)
+  num_comprobante   String            @db.VarChar(10)
+  impuesto          Int
+  total             Decimal
+  estado            Int               @default(1)
+  eliminado         String            @default("NO")
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  detalles          Detalle_Ingreso[]
+}
+
+model Detalle_Ingreso {
+  id        String  @id @default(uuid())
+  articulo  String
+  cantidad  Int
+  precio    Decimal
+  ingreso   Ingreso @relation(fields: [ingresoId], references: [id])
+  ingresoId String
+}
+
+model Venta {
+  id                String          @id @default(uuid())
+  usuario           Usuario         @relation(fields: [usuarioId], references: [id])
+  usuarioId         String
+  persona           Persona         @relation(fields: [personaId], references: [id])
+  personaId         String
+  tipo_comprobante  String          @db.VarChar(20)
+  serie_comprobante String          @db.VarChar(7)
+  num_comprobante   String          @db.VarChar(10)
+  impuesto          Int
+  total             Decimal
+  eliminado         String          @default("NO")
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  detalles          Detalle_Venta[]
+}
+
+model Detalle_Venta {
+  id        String   @id @default(uuid())
+  articulo  String
+  cantidad  Int
+  precio    Decimal
+  descuento Int
+  estado    Int      @default(1)
+  createdAt DateTime @default(now())
+  venta     Venta    @relation(fields: [ventaId], references: [id])
+  ventaId   String
+}
+
+model Articulo {
+  id           String    @id @default(uuid())
+  categoria    Categoria @relation(fields: [categoriaId], references: [id])
+  categoriaId  String
+  codigo       String    @db.VarChar(64)
+  nombre       String    @unique @db.VarChar(50)
+  descripcion  String    @db.VarChar(255)
+  precio_venta Decimal
+  stock        Int
+  estado       Int       @default(1)
+  eliminado    String    @default("NO")
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
