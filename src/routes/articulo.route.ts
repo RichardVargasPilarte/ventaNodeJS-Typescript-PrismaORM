@@ -22,7 +22,7 @@ articuloRouter.get("/:id", obtenerArticuloId);
 articuloRouter.post("/", [
     body('codigo', 'El nombre es obligatorio').not().isEmpty(),
     body('nombre', 'El nombre es obligatorio').not().isEmpty(),
-    body('descripcion', 'La descripcion es obligatoria').isEmail(),
+    body('descripcion', 'La descripcion es obligatoria').not().isEmpty(),
     body('precio_venta', 'El precio de venta es obligatorio').not().isEmpty(),
     body('stock', 'El stock de articulos es obligatorio').not().isEmpty(),
     body('categoriaId', 'El id de la categoria es obligatorio').not().isEmpty(),
@@ -35,11 +35,12 @@ articuloRouter.post("/", [
 articuloRouter.put("/:id", [
     body('codigo', 'El nombre es obligatorio').not().isEmpty(),
     body('nombre', 'El nombre es obligatorio').not().isEmpty(),
-    body('descripcion', 'El descripcion es obligatorio').isEmail(),
+    body('descripcion', 'El descripcion es obligatorio').not().isEmpty(),
     body('precio_venta', 'El precio de venta es obligatorio').not().isEmpty(),
     body('stock', 'El stock de articulos es obligatorio').not().isEmpty(),
     body('categoriaId', 'El id de la categoria es obligatorio').not().isEmpty(),
     body('estado', 'El estado del articulo es obligatorio').not().isEmpty(),
+    body('eliminado', 'El campo eliminado es obligatorio').not().isEmpty(),
     validarCampos
 ],
     actualizarArticulo

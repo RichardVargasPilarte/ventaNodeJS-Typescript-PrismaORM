@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "Role" AS ENUM ('USER', 'ADMIN');
+CREATE TYPE "Role" AS ENUM ('ADMINISTRADOR', 'BODEGUERO', 'VENDEDOR');
 
 -- CreateTable
 CREATE TABLE "Usuario" (
@@ -7,7 +7,7 @@ CREATE TABLE "Usuario" (
     "nombre" VARCHAR(30) NOT NULL,
     "apellido" VARCHAR(30) NOT NULL,
     "email" VARCHAR(50) NOT NULL,
-    "role" "Role" NOT NULL DEFAULT 'USER',
+    "role" "Role" NOT NULL DEFAULT 'ADMINISTRADOR',
     "username" VARCHAR(30) NOT NULL,
     "tipo_documento" VARCHAR(20) NOT NULL,
     "num_documento" VARCHAR(30) NOT NULL,
@@ -17,6 +17,7 @@ CREATE TABLE "Usuario" (
     "estado" INTEGER NOT NULL DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "eliminado" TEXT NOT NULL DEFAULT 'NO',
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Usuario_pkey" PRIMARY KEY ("id")
 );
@@ -33,7 +34,9 @@ CREATE TABLE "Persona" (
     "telefono" VARCHAR(10) NOT NULL,
     "email" TEXT NOT NULL,
     "estado" INTEGER NOT NULL DEFAULT 1,
+    "eliminado" TEXT NOT NULL DEFAULT 'NO',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Persona_pkey" PRIMARY KEY ("id")
 );
@@ -45,6 +48,7 @@ CREATE TABLE "Categoria" (
     "descripcion" VARCHAR(255) NOT NULL,
     "estado" INTEGER NOT NULL DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     "eliminado" TEXT NOT NULL DEFAULT 'NO',
 
     CONSTRAINT "Categoria_pkey" PRIMARY KEY ("id")
@@ -61,7 +65,9 @@ CREATE TABLE "Ingreso" (
     "impuesto" INTEGER NOT NULL,
     "total" DECIMAL(65,30) NOT NULL,
     "estado" INTEGER NOT NULL DEFAULT 1,
+    "eliminado" TEXT NOT NULL DEFAULT 'NO',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Ingreso_pkey" PRIMARY KEY ("id")
 );
@@ -87,6 +93,9 @@ CREATE TABLE "Venta" (
     "num_comprobante" VARCHAR(10) NOT NULL,
     "impuesto" INTEGER NOT NULL,
     "total" DECIMAL(65,30) NOT NULL,
+    "eliminado" TEXT NOT NULL DEFAULT 'NO',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Venta_pkey" PRIMARY KEY ("id")
 );
@@ -115,7 +124,9 @@ CREATE TABLE "Articulo" (
     "precio_venta" DECIMAL(65,30) NOT NULL,
     "stock" INTEGER NOT NULL,
     "estado" INTEGER NOT NULL DEFAULT 1,
+    "eliminado" TEXT NOT NULL DEFAULT 'NO',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Articulo_pkey" PRIMARY KEY ("id")
 );

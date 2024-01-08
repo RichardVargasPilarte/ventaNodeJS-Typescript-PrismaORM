@@ -19,7 +19,7 @@ ventaRouter.get("/:id", obtenerVentaId);
 
 ventaRouter.post("/", [
     body('tipo_comprobante', 'El tipo comprobante es obligatorio').not().isEmpty(),
-    body('serie_comprobante', 'La serie del comprobante es obligatorio').isEmail(),
+    body('serie_comprobante', 'La serie del comprobante es obligatorio').not().isEmpty(),
     body('num_comprobante', 'El numero de comprobante es obligatorio').not().isEmpty(),
     body('impuesto', 'El impuesto es obligatorio').not().isEmpty(),
     body('total', 'El total es obligatorio').not().isEmpty(),
@@ -32,12 +32,13 @@ ventaRouter.post("/", [
 
 ventaRouter.put("/:id", [
     body('tipo_comprobante', 'El tipo comprobante es obligatorio').not().isEmpty(),
-    body('serie_comprobante', 'La serie del comprobante es obligatorio').isEmail(),
+    body('serie_comprobante', 'La serie del comprobante es obligatorio').not().isEmpty(),
     body('num_comprobante', 'El numero de comprobante es obligatorio').not().isEmpty(),
     body('impuesto', 'El impuesto es obligatorio').not().isEmpty(),
     body('total', 'El total es obligatorio').not().isEmpty(),
     body('usuarioId', 'El id del usuario es obligatorio').not().isEmpty(),
     body('personaId', 'El id de la persona es obligatorio').not().isEmpty(),
+    body('eliminado', 'El campo eliminado es obligatorio').not().isEmpty(),
     validarCampos
 ],
     actualizarVenta

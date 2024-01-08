@@ -24,7 +24,7 @@ personaRouter.get("/:id", obtenerPersonaId);
 
 personaRouter.post("/", [
     body('nombre', 'El nombre es obligatorio').not().isEmpty(),
-    body('apellido', 'El apellido es obligatorio').isEmpty(),
+    body('apellido', 'El apellido es obligatorio').not().isEmpty(),
     body('tipo_persona', 'El precio de venta es obligatorio').not().isEmpty(),
     body('tipo_documento', 'El tipo de documento es obligatorio').not().isEmpty(),
     body('num_documento', 'El numero de documento es obligatorio').not().isEmpty(),
@@ -39,7 +39,7 @@ personaRouter.post("/", [
 
 personaRouter.put("/:id", [
     body('nombre', 'El nombre es obligatorio').not().isEmpty(),
-    body('apellido', 'El apellido es obligatorio').isEmpty(),
+    body('apellido', 'El apellido es obligatorio').not().isEmpty(),
     body('tipo_persona', 'El precio de venta es obligatorio').not().isEmpty(),
     body('tipo_documento', 'El tipo de documento es obligatorio').not().isEmpty(),
     body('num_documento', 'El numero de documento es obligatorio').not().isEmpty(),
@@ -47,6 +47,7 @@ personaRouter.put("/:id", [
     body('telefono', 'El numero de telefono es obligatorio').not().isEmpty(),
     body('email', 'El correo electronico es obligatorio').isEmail(),
     body('estado', 'El estado del arrticulo es obligatorio').not().isEmpty(),
+    body('eliminado', 'El campo eliminado es obligatorio').not().isEmpty(),
     validarCampos
 ],
     actualizarPersona
@@ -55,13 +56,13 @@ personaRouter.put("/:id", [
 personaRouter.delete("/:id", borrarPersona);
 
 personaRouter.put("/:id", [
-    body('estado', 'El estado del articulo es obligatorio').not().isEmpty(),
+    body('estado', 'El estado de la persona es obligatorio').not().isEmpty(),
 ],
     activarPersona
 );
 
 personaRouter.put("/:id", [
-    body('estado', 'El estado del articulo es obligatorio').not().isEmpty(),
+    body('estado', 'El estado de la persona es obligatorio').not().isEmpty(),
 ],
     desactivarPersona
 );

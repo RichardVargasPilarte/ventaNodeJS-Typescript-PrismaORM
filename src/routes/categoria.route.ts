@@ -21,8 +21,7 @@ categoriaRouter.get("/:id", obtenerCategoriaId);
 
 categoriaRouter.post("/", [
     body('nombre', 'El nombre es obligatorio').not().isEmpty(),
-    body('descripcion', 'El descripcion es obligatorio').isEmail(),
-    body('estado', 'El estado del arrticulo es obligatorio').not().isEmpty(),
+    body('descripcion', 'El descripcion es obligatorio').not().isEmpty(),
     validarCampos
 ],
     crearCategoria
@@ -30,8 +29,9 @@ categoriaRouter.post("/", [
 
 categoriaRouter.put("/:id", [
     body('nombre', 'El nombre es obligatorio').not().isEmpty(),
-    body('descripcion', 'El descripcion es obligatorio').isEmail(),
-    body('estado', 'El estado del arrticulo es obligatorio').not().isEmpty(),
+    body('descripcion', 'El descripcion es obligatorio').not().isEmpty(),
+    body('estado', 'El estado es obligatorio').not().isEmpty(),
+    body('eliminado', 'El campo eliminado es obligatorio').not().isEmpty(),
     validarCampos
 ],
     actualizarCategoria
@@ -40,13 +40,13 @@ categoriaRouter.put("/:id", [
 categoriaRouter.delete("/:id", borrarCategoria);
 
 categoriaRouter.put("/:id", [
-    body('estado', 'El estado del articulo es obligatorio').not().isEmpty(),
+    body('estado', 'El estado de la categoria es obligatorio').not().isEmpty(),
 ],
     activarCategoria
 );
 
 categoriaRouter.put("/:id", [
-    body('estado', 'El estado del articulo es obligatorio').not().isEmpty(),
+    body('estado', 'El estado de la categoria es obligatorio').not().isEmpty(),
 ],
     desactivarCategoria
 );
