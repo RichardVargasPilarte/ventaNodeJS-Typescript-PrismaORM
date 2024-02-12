@@ -27,7 +27,7 @@ export const obtenerClientes = async (req, res) => {
     try {
         const clientes = await personaClient.findMany({
             where: {
-                tipo_persona: "Cliente",
+                tipoPersona: "Cliente",
                 eliminado: "NO"
             }
         });
@@ -45,7 +45,7 @@ export const obtenerProveedores = async (req, res) => {
     try {
         const proveedores = await personaClient.findMany({
             where: {
-                tipo_persona: "Proveedores",
+                tipoPersona: "Proveedores",
                 eliminado: "NO"
             }
         });
@@ -96,9 +96,9 @@ export const crearPersona = async (req, res) => {
             data: {
                 nombre: personaData.nombre,
                 apellido: personaData.apellido,
-                tipo_persona: personaData.tipo_persona,
-                tipo_documento: personaData.tipo_documento,
-                num_documento: personaData.num_documento,
+                tipoPersona: personaData.tipoPersona,
+                tipoDocumento: personaData.tipoDocumento,
+                numDocumento: personaData.numDocumento,
                 direccion: personaData.direccion,
                 telefono: personaData.telefono,
                 email: personaData.email,

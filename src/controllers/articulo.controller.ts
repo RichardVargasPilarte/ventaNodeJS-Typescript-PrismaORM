@@ -59,7 +59,7 @@ export const crearArticulo = async (req, res) => {
                 codigo: articuloData.codigo,
                 nombre: articuloData.nombre,
                 descripcion: articuloData.descripcion,
-                precio_venta: articuloData.precio_venta,
+                precioVenta: articuloData.precioVenta,
                 stock: articuloData.stock,
                 estado: articuloData.estado,
                 categoria: {

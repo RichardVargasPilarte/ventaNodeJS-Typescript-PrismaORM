@@ -58,9 +58,9 @@ export const crearVenta = async (req, res) => {
         const ventaData = req.body;
         const venta = await ventaClient.create({
             data: {
-                tipo_comprobante: ventaData.tipo_comprobante,
-                serie_comprobante: ventaData.serie_comprobante,
-                num_comprobante: ventaData.num_comprobante,
+                tipoComprobante: ventaData.tipoComprobante,
+                serieComprobante: ventaData.serieComprobante,
+                numComprobante: ventaData.numComprobante,
                 impuesto: ventaData.impuesto,
                 total: ventaData.total,
                 usuario: {

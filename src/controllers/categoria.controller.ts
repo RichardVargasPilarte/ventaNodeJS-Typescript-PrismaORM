@@ -54,6 +54,18 @@ export const obtenerCategoriaId = async (req, res) => {
 export const crearCategoria = async (req, res) => {
     try {
         const categoriaData = req.body;
+        console.log('Request received:', categoriaData);
+
+        const existsCategoria = await categoriaClient.findUnique({
+            where: {
+                nombre: categoriaData.nombre,
+            },
+        });
+
+        if (existsCategoria) {
+            return res.status(400).json({ message: 'Categoria ya existe' });
+        }
+
         const categoria = await categoriaClient.create({
             data: {
                 nombre: categoriaData.nombre,
@@ -64,7 +76,8 @@ export const crearCategoria = async (req, res) => {
             }
         });
 
-        res.status(201).json({ data:categoria })
+        console.log('User created:', categoria);
+        res.status(201).json({ data: categoria })
     } catch (error) {
         console.log(error);
         res.status(500).send({
@@ -154,7 +167,7 @@ export const desactivarCategoria = async (req, res) => {
         })
 
         res.status(200).json({ data: categoria })
-        
+
     } catch (error) {
         console.log(error);
         res.status(500).send({

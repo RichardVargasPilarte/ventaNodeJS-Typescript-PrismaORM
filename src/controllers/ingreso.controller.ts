@@ -58,9 +58,9 @@ export const crearIngreso = async (req, res) => {
         const ingresoData = req.body;
         const ingreso = await ingresoClient.create({
             data: {
-                tipo_comprobante: ingresoData.tipo_comprobante,
-                serie_comprobante: ingresoData.serie_comprobante,
-                num_comprobante: ingresoData.num_comprobante,
+                tipoComprobante: ingresoData.tipoComprobante,
+                serieComprobante: ingresoData.serieComprobante,
+                numComprobante: ingresoData.numComprobante,
                 impuesto: ingresoData.impuesto,
                 total: ingresoData.total,
                 estado: ingresoData.estado,

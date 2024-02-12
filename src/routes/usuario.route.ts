@@ -24,12 +24,11 @@ usuarioRouter.post("/", [
     body('email', 'El correo electronico es obligatorio').isEmail(),
     body('role', 'El rol del usuario es obligatorio').not().isEmpty,
     body('username', 'El nombre de usuario es obligatorio').not().isEmpty(),
-    body('tipo_documento', 'El tipo de documento es obligatorio').not().isEmpty(),
-    body('num_documento', 'El numero de documento es obligatorio').not().isEmpty(),
+    body('tipoDocumento', 'El tipo de documento es obligatorio').not().isEmpty(),
+    body('numDocumento', 'El numero de documento es obligatorio').not().isEmpty(),
     body('direccion', 'La direccion es obligatoria').not().isEmpty(),
     body('telefono', 'El numero de telefono es obligatorio').not().isEmpty(),
     body('password', 'La contraseña es obligatoria').not().isEmpty(),
-    body('estado', 'El estado del usuario es obligatorio').not().isEmpty(),
     validarCampos
 ],
     crearUsuario
